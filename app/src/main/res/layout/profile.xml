@@ -1,0 +1,458 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pink"
+    android:padding="16dp">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Profile Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:background="@drawable/ic_background_item">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="75dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/foto_profile"
+                android:contentDescription="Profile Image"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/profile_image"
+                android:layout_marginStart="8dp"
+                android:text="KELOMPOK 4"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_toEndOf="@id/profile_image"
+                android:layout_marginStart="8dp"
+                android:text="Phone: -"
+                android:textColor="@android:color/black"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_phone"
+                android:layout_toEndOf="@id/profile_image"
+                android:layout_marginStart="8dp"
+                android:text="Email: kelompok4@gmail.com"
+                android:textColor="@android:color/black"
+                android:textSize="12dp" />
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <!-- Tab section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/editprofile"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:text="            My Profile"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tx_editprofile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ubah Profile       "
+                            android:textColor="@android:color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/arrow_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_next" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <!-- Icons and Labels section -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:paddingTop="16dp">
+
+                    <!-- QR Code Section -->
+                    <LinearLayout
+                        android:id="@+id/qrcode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/qr_code"
+                            android:contentDescription="QR Code Icon"
+                            android:background="@drawable/ic_background_item"
+                            android:padding="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Show QR Code"
+                            android:textColor="@android:color/black"
+                            android:textSize="13dp"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <!-- Manage Section -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/kelola"
+                            android:contentDescription="Manage Icon"
+                            android:background="@drawable/ic_background_item"
+                            android:padding="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kelola"
+                            android:textColor="@android:color/black"
+                            android:textSize="13dp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </GridLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Blood Sugar Information Section -->
+
+        <!-- Profile Options Section -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pink"
+            android:padding="16dp">
+
+            <!-- Last Update Text -->
+            <TextView
+                android:id="@+id/lastUpdateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Last Update -"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/circleLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Circular Layout for "Gula Darah" -->
+            <FrameLayout
+                android:id="@+id/circleLayout"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/circular_background"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/typeUserText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lastUpdateText">
+
+
+                <!-- Konten di dalamnya -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="-"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="16dp"
+                    android:text="Gula Darah"
+                    android:textColor="@android:color/black"
+                    android:textSize="14dp" />
+
+            </FrameLayout>
+
+
+            <!-- Age and Weight Texts -->
+
+            <TextView
+                android:id="@+id/ageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="56dp"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toStartOf="@id/circleLayout"
+                app:layout_constraintTop_toTopOf="@id/circleLayout" />
+
+            <TextView
+                android:id="@+id/ageLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="44dp"
+                android:text="Usia"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toStartOf="@id/circleLayout"
+                app:layout_constraintTop_toBottomOf="@id/ageText" />
+
+            <!-- HbA1C, Type User, and Tension Texts -->
+
+            <TextView
+                android:id="@+id/weightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="68dp"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@id/circleLayout"
+                app:layout_constraintTop_toTopOf="@id/circleLayout" />
+
+            <TextView
+                android:id="@+id/weightLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="4dp"
+                android:text="Berat"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@id/circleLayout"
+                app:layout_constraintTop_toBottomOf="@id/weightText" />
+
+
+
+            <TextView
+                android:id="@+id/hba1cLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="HbA1C"
+                android:textColor="@color/pink"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/typeUserText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="32dp"
+                android:text="non-diabetesi"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                app:layout_constraintStart_toEndOf="@id/hba1cLabel"
+                app:layout_constraintTop_toBottomOf="@id/circleLayout" />
+
+            <TextView
+                android:id="@+id/typeUserLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="108dp"
+                android:layout_marginTop="8dp"
+                android:text="Tipe User"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@id/hba1cLabel"
+                app:layout_constraintTop_toBottomOf="@id/typeUserText" />
+
+
+            <!-- HbA1C, Type User, and Tension Texts -->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:cardCornerRadius="12dp"
+                android:background="#F5F5F5">
+
+                <!-- Profile Option Items -->
+
+                <RelativeLayout
+                    android:id="@+id/about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingVertical="12dp">
+
+                    <ImageView
+                        android:id="@+id/about_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/ic_background_item"
+                        android:foregroundGravity="center"
+                        android:src="@drawable/ic_about" />
+
+                    <TextView
+                        android:id="@+id/about_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_toEndOf="@id/about_icon"
+                        android:text="About"
+                        android:textColor="@android:color/black"
+                        android:textSize="14dp"/>
+
+                    <ImageView
+                        android:id="@+id/arrow_icon_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_next" />
+                </RelativeLayout>
+
+
+                <!-- Garis Pemisah -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" /> <!-- Ganti dengan warna yang diinginkan -->
+
+                <RelativeLayout
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingVertical="12dp">
+
+                    <ImageView
+                        android:id="@+id/logout_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_logout"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/ic_background_item" />
+
+                    <TextView
+                        android:id="@+id/logout_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/logout_icon"
+                        android:layout_marginStart="16dp"
+                        android:text="Logout"
+                        android:textSize="14dp"
+                        android:textColor="@android:color/black" />
+
+                    <ImageView
+                        android:id="@+id/arrow_icon_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_next" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/hapuskunText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hapus Akun?"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="17sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/circleLayout"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+</ScrollView>

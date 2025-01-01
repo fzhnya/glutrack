@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:background="#FDE8E9"
+    tools:context=".MainActivity">
+
+    <!-- ScrollView untuk membuat konten dapat digulir -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <!-- Wrapper LinearLayout untuk konten -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_gula_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GULA MINDER"
+                android:layout_gravity="start"
+                android:textSize="26sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_marginTop="1dp" />
+
+            <!-- Hai User Section -->
+            <TextView
+                android:id="@+id/tv_hai_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hai User!"
+                android:layout_gravity="start"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Card Info Diabetes dan Avatar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tv_info_diabetes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="start"
+                    android:padding="10dp"
+                    android:text="Manis Terkendali,\nHidup Lebih Nyaman Bersahaja"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:src="@drawable/guldar"
+                    android:layout_marginStart="10dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_gula_darah_saya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gula Darah Saya"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp" />
+
+            <!-- Kotak-kotak informasi gula darah -->
+            <!-- Resto Cards -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"> <!-- Mengatur ScrollView agar horizontal -->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="8dp"
+                    android:layout_marginTop="10dp"> <!-- Tambah padding horizontal -->
+
+                    <!-- Kotak CardView (Terakhir) -->
+
+                    <!-- Kotak CardView (Rata-rata) -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tracker1"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginEnd="17dp"
+                        android:backgroundTint="#ea1822"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_last"
+                            android:layout_width="wrap_content"
+                            android:layout_height="130dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Recent"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Default"
+                                android:textColor="#ffffff"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80.0 mg/dL"
+                                android:textColor="#ffffff"
+                                android:textSize="27sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tracker2"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#1d2951"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_last_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="130dp"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Average"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Default"
+                                android:textColor="#ffffff"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80.0 mg/dL"
+                                android:textColor="#ffffff"
+                                android:textSize="27sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+                <!-- Tombol Tambah Pertama -->
+
+                <!-- Tombol Tambah Kedua -->
+                <Button
+                    android:id="@+id/btn_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#333333"
+                    android:text="Default (06)"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Add"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#333333"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+
+            <!-- Teks Seputar Gula Darah -->
+            <TextView
+                android:id="@+id/tv_seputar_gula_darah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seputar Diabetes"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"/>
+
+            <GridLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:rowCount="2"
+                android:columnCount="2"
+                android:alignmentMode="alignMargins"
+                android:layout_gravity="center"
+                android:layout_margin="2dp">
+
+                <!-- Card 1:-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/artikel_1"
+                    android:layout_width="165dp"
+                    android:layout_height="300dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="start"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:padding="1dp">
+
+                        <ImageView
+                            android:id="@+id/img"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/apa"
+                            android:contentDescription="diabetes"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tentang Diabetes"
+                            android:textColor="#888"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Card 2: Konsultasi -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/artikel_2"
+                    android:layout_width="165dp"
+                    android:layout_height="300dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginEnd="20dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/img_2"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/meal"
+                            android:contentDescription="-"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Personalized\n Meal Plans"
+                            android:textColor="#888"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- Card 3:  -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/artikel_3"
+                    android:layout_width="165dp"
+                    android:layout_height="300dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="start"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:padding="1dp">
+
+                        <ImageView
+                            android:id="@+id/img_3"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/olahraga"
+                            android:contentDescription="Rekomendasi Exercise"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rekomendasi\n Exercise"
+                            android:textColor="#888"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Card 4: Konsultasi -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/artikel_4"
+                    android:layout_width="165dp"
+                    android:layout_height="300dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/img_1"
+                            android:layout_width="150dp"
+                            android:layout_height="165dp"
+                            android:src="@drawable/meditasi"
+                            android:contentDescription="Konsultasi"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manajemen stres"
+                            android:textColor="#888"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu" />
+</LinearLayout>
+

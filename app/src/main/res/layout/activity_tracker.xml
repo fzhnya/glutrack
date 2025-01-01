@@ -1,0 +1,147 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fde8e9"
+    tools:context=".TrackerActivity">
+
+    <!-- Tracker Title -->
+    <TextView
+        android:id="@+id/tv_gula_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="start"
+        android:padding="10dp"
+        android:text="TRACKER"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Recent Readings Section -->
+    <LinearLayout
+        android:id="@+id/recentReadingsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/averageReadingsLayout"
+        app:layout_constraintTop_toBottomOf="@id/tv_gula_reminder">
+
+        <TextView
+            android:id="@+id/recentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terbaru"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/recentReadingValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80.0 mg/dL"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:paddingTop="4dp" />
+
+        <TextView
+            android:id="@+id/recentReadingDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oct 29, 01:46"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:paddingTop="2dp" />
+    </LinearLayout>
+
+    <!-- Average Readings Section -->
+    <LinearLayout
+        android:id="@+id/averageReadingsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/recentReadingsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_gula_reminder">
+
+        <TextView
+            android:id="@+id/averageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rata-rata"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/averageReadingValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="83.3 mg/dL"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:paddingTop="4dp" />
+
+        <TextView
+            android:id="@+id/averageReadingMinMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min: 80.0 - Max: 100.0"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:paddingTop="2dp" />
+    </LinearLayout>
+
+    <!-- Line Chart -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="370dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:background="#1d2951"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/averageReadingsLayout" />
+
+    <!-- Add Button -->
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#E91E63"
+        android:text="Add"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lineChart" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/readingsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/addButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

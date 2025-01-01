@@ -1,0 +1,6 @@
+<!-- res/drawable/ic_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/red" /> <!-- Set your background color here -->
+    <corners android:radius="50dp" /> <!-- High radius to make it circular -->
+    <size android:width="47dp" android:height="47dp"/> <!-- Set size to match the ImageView dimensions -->
+</shape>

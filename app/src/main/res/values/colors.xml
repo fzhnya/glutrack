@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hijau">#A8E6CF</color>
+    <color name="biru">#B3E5FC</color>
+    <color name="kuning">#FFF9C4</color>
+    <color name="orange">#FFCC80</color>
+    <color name="abu">#F5F5F5</color>
+    <color name="red">#EE464E</color>
+    <color name="pink">#FDE8E9</color>
+    <color name="light_red">#FFCDD2</color>
+    <color name="abu_gelap">#757575</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="abu_muda">#BDBDBD</color>
+    <color name="navy_blue">#1d2951</color>
+</resources>
