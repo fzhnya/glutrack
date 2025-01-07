@@ -232,7 +232,7 @@ class TrackerActivity : AppCompatActivity() {
             }
         })
     }
-    // change 1
+    // change 2
 
     private fun setupRecyclerView() {
         // Filter records for today and sort in descending order

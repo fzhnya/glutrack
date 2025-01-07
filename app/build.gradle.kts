@@ -5,6 +5,10 @@ plugins {
 }
 
 android {
+
+    viewBinding {
+        enable = true
+    }
     namespace = "com.example.profile"
     compileSdk = 34
 
@@ -66,6 +70,12 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.2.2")
     implementation("androidx.camera:camera-lifecycle:1.2.2")
     implementation("androidx.camera:camera-view:1.0.0-alpha31")// Contoh dependensi ML Kit
-
-
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("com.google.android.gms:play-services-vision:20.0.0")
+    implementation ("com.google.android.gms:play-services-mlkit-text-recognition:19.0.1")
+    implementation ("com.vanniktech:android-image-cropper:4.5.0")
+    implementation ("com.github.CanHub:Android-Image-Cropper:4.x.x")
 }

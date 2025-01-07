@@ -24,11 +24,11 @@
             <ImageView
                 android:id="@+id/backButton"
                 android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:src="@drawable/ic_back"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:id="@+id/title_text"

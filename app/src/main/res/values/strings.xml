@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Your App Name</string>
+    <string name="app_name">GluTrack</string>
     <string name="pengetahuan">OCR</string>
     <string name="pelacak">tracking</string>
     <string name="pengaturan">profile</string>
+    <string name="result_text">Gula: %1$s, Karbohidrat: %2$s</string>
+    <string name="not_found">Tidak ditemukan</string>
+
 </resources>

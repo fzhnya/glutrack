@@ -20,9 +20,14 @@ interface ApiService {
     @POST("api/kelompok_4/login.php")
     fun loginUser(@Body user: User): Call<ApiResponse>
 
-    // Endpoint untuk mengirimkan biodata
-    @POST("api/kelompok_4/save_biodata.php")
-    fun saveBiodata(@Body biodata: Biodata): Call<ApiResponse>
+//    // Endpoint untuk mengirimkan biodata
+//    @POST("api/kelompok_4/save_biodata.php")
+//    fun saveBiodata(@Body biodata: Biodata): Call<ApiResponse>
+    @POST("api/kelompok_4/api_diabetes.php")
+    suspend fun submitBiodata(@Body biodata: Biodata): ApiResponse
+
+    @GET("api/kelompok_4/api_diabetes.php")
+    suspend fun getPrediction(): ApiResponse
 
     @GET("api/kelompok_4/get_glucose.php") // Endpoint yang sesuai dengan server Anda
     fun getGlucoseData(): Call<List<GlucoseData>> // Sesuaikan dengan struktur respons API

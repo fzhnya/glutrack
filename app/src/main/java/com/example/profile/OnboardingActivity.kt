@@ -24,7 +24,7 @@ class OnboardingActivity : AppCompatActivity() {
 
         if (!isFirstRun) {
             // Jika sudah pernah onboarding, langsung ke LoginActivity
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, OCRActivity::class.java)
             startActivity(intent)
             finish()
             return

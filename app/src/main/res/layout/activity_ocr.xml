@@ -1,98 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".OCRActivity">
 
+    <!-- Navbar tetap di bagian atas -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_copy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/red"
+        android:padding="8dp"
+        android:gravity="center_vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/navbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OCR Navbar"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
 
-            <EditText
-                android:id="@+id/result_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@null"
-                android:minHeight="48dp"
-                />
-
-        </ScrollView>
+        <!-- Tambahkan elemen navbar lain jika perlu -->
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_copy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="32dp"
-        android:text="copy text"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
-        android:id="@+id/btn_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
-        android:text="take picture"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="48dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/img"
-        />
-
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ambil foto makanan"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="14sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview"
-        app:layout_constraintEnd_toEndOf="@+id/imageview"
-        app:layout_constraintStart_toStartOf="@+id/imageview"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <!-- Konten ScrollView berada di bawah navbar -->
+    <ScrollView
+        android:id="@+id/scroll_content"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/navbar"
+        android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ImageView untuk menampilkan gambar hasil tangkapan kamera -->
+            <ImageView
+                android:id="@+id/camera_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_ocr"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@drawable/ic_ocr" />
+
+            <!-- Tombol untuk menangkap gambar -->
+            <Button
+                android:id="@+id/captureImgBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capture Image"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/red" />
+
+            <!-- Tombol untuk crop image (dihilangkan secara default) -->
+            <Button
+                android:id="@+id/cropButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crop Image"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/red" />
+
+            <!-- Label untuk hasil OCR -->
+            <TextView
+                android:id="@+id/oocr_text_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OCR Text"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <!-- Hasil OCR -->
+            <TextView
+                android:id="@+id/resulttext"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:text=""
+                android:padding="8dp"
+                android:background="@drawable/border"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Label untuk komposisi makanan -->
+            <TextView
+                android:id="@+id/composition_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Komposisi Makanan"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <!-- Teks komposisi makanan -->
+            <TextView
+                android:id="@+id/composition_text"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text=""
+                android:padding="8dp"
+                android:background="@drawable/border"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Tombol untuk menyalin teks -->
+            <Button
+                android:id="@+id/copyTextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Copy Text"
+                android:visibility="invisible"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/red" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

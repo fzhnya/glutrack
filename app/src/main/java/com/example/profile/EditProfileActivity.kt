@@ -1,165 +1,174 @@
 package com.example.profile
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RadioGroup
+import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.profile.databinding.ActivityInputDataBinding
+import kotlinx.coroutines.launch
+
+// ViewModel untuk InputDataActivity
+class InputDataViewModel : ViewModel() {
+    private val _state = MutableLiveData<InputState>()
+    val state: LiveData<InputState> = _state
+
+    fun submitBiodata(biodata: Biodata) {
+        viewModelScope.launch {
+            _state.value = InputState.Loading
+            try {
+                Log.d("ViewModel", "Submitting biodata: $biodata")
+                val response = RetrofitClient.apiService.submitBiodata(biodata) // Pastikan RetrofitClient telah disiapkan
+                Log.d("ViewModel", "Received response: $response")
+                _state.value = InputState.Success(response)
+            } catch (e: Exception) {
+                Log.e("ViewModel", "Error submitting biodata: ${e.message}", e)
+                _state.value = InputState.Error(e.message ?: "Terjadi kesalahan")
+            }
+        }
+    }
+}
 
 class EditProfileActivity : AppCompatActivity() {
-
-    private lateinit var namaLengkap: EditText
-    private lateinit var usia: EditText
-    private lateinit var beratBadan: EditText
-    private lateinit var tinggiBadan: EditText
-    private lateinit var jenisKelamin: RadioGroup
-    private lateinit var statusDiabetes: RadioGroup
-    private lateinit var saveButton: Button
-    private lateinit var generateTokenButton: Button
-    private lateinit var backButton: ImageView
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var binding: ActivityInputDataBinding
+    private val viewModel: InputDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.edit_profile)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.red)
+        binding = ActivityInputDataBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Initialize views
-        namaLengkap = findViewById(R.id.namaLengkap)
-        usia = findViewById(R.id.usia)
-        beratBadan = findViewById(R.id.beratBadan)
-        tinggiBadan = findViewById(R.id.tinggiBadan)
-        jenisKelamin = findViewById(R.id.jenisKel)
-        statusDiabetes = findViewById(R.id.statusDbt)
-        saveButton = findViewById(R.id.saveButton)
-        generateTokenButton = findViewById(R.id.btnGenerateToken)
-        backButton = findViewById(R.id.backButton)
-
-        // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-
-        // Handle save button click
-        saveButton.setOnClickListener {
-            if (!validateInput()) return@setOnClickListener
-
-            // Initialize values
-            val fullName = namaLengkap.text.toString()
-            val usiaValue = usia.text.toString().toInt()  // Convert to Int
-            val beratBadanValue = beratBadan.text.toString().toInt()  // Convert to Int
-            val tinggiBadanValue = tinggiBadan.text.toString().toInt()  // Convert to Int
-
-// Get selected gender and diabetes status
-            val selectedGender = if (jenisKelamin.checkedRadioButtonId == R.id.male) "Laki-laki" else "Perempuan"
-            val selectedDiabetesStatus = if (statusDiabetes.checkedRadioButtonId == R.id.nondiabetes) "Normal" else "Diabetes"
-
-// Generate token
-            val token = generateToken()  // This will return a String
-
-// Create Biodata object
-            val biodata = Biodata(
-                id = 0,  // Assuming `id` is auto-generated or you can set it to 0 for now
-                namaLengkap = fullName,
-                usia = usiaValue,
-                beratBadan = beratBadanValue,
-                tinggiBadan = tinggiBadanValue,
-                jenisKelamin = selectedGender,
-                statusDiabetes = selectedDiabetesStatus,
-                token = token
-            )
-
-// Optionally, show the BMI calculation result
-            val bmi = biodata.calculateBMI()
-
-
-
-            // Call API to save biodata
-            val call = RetrofitClient.apiService.saveBiodata(biodata)
-            call.enqueue(object : Callback<ApiResponse> {
-                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@EditProfileActivity, "Biodata berhasil disimpan", Toast.LENGTH_SHORT).show()
-
-                        // Save data to SharedPreferences
-                        val editor = sharedPreferences.edit()
-                        editor.putString("fullName", fullName)
-                        editor.putInt("usia", usiaValue)
-                        editor.putFloat("beratBadan", beratBadanValue.toFloat())
-                        editor.putFloat("tinggiBadan", tinggiBadanValue.toFloat())
-                        editor.putString("jenisKelamin", selectedGender)
-                        editor.putString("statusDiabetes", selectedDiabetesStatus)
-                        editor.apply()
-
-                        // Navigate to MainActivity
-                        val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this@EditProfileActivity, "Gagal menyimpan biodata", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                    Toast.makeText(this@EditProfileActivity, "Terjadi kesalahan: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-
-        // Handle Generate Token button click
-        generateTokenButton.setOnClickListener {
-            val token = generateToken()
-            sharedPreferences.edit().putString("userToken", token).apply()
-            Toast.makeText(this, "Token Generated: $token", Toast.LENGTH_SHORT).show()
-        }
-
-        // Handle back button click
-        backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        setupViews()
+        observeViewModel()
     }
 
-    // Validate input fields
+    private fun setupViews() {
+        binding.btnSubmit.setOnClickListener {
+            if (validateInput()) {
+                submitData()
+            }
+        }
+
+        binding.progressBar.visibility = View.GONE
+    }
+
     private fun validateInput(): Boolean {
-        if (namaLengkap.text.isEmpty() || usia.text.isEmpty() || beratBadan.text.isEmpty() || tinggiBadan.text.isEmpty()) {
-            Toast.makeText(this, "Mohon lengkapi semua data!", Toast.LENGTH_SHORT).show()
-            return false
+        with(binding) {
+            if (edtNama.text.isNullOrEmpty()) {
+                edtNama.error = "Nama harus diisi"
+                return false
+            }
+            if (edtUsia.text.isNullOrEmpty() || edtUsia.text.toString().toIntOrNull() == null) {
+                edtUsia.error = "Usia harus diisi dengan angka"
+                return false
+            }
+            if (edtBeratBadan.text.isNullOrEmpty() || edtBeratBadan.text.toString().toDoubleOrNull() == null) {
+                edtBeratBadan.error = "Berat badan harus diisi dengan angka"
+                return false
+            }
+            if (edtTinggiBadan.text.isNullOrEmpty() || edtTinggiBadan.text.toString().toDoubleOrNull() == null) {
+                edtTinggiBadan.error = "Tinggi badan harus diisi dengan angka"
+                return false
+            }
+            if (rgJenisKelamin.checkedRadioButtonId == -1) {
+                Toast.makeText(this@EditProfileActivity, "Pilih jenis kelamin", Toast.LENGTH_SHORT).show(); return false
+            }
+            if (rgRiwayatKeturunan.checkedRadioButtonId == -1) {
+                Toast.makeText(this@EditProfileActivity, "Pilih riwayat keturunan", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            return true
         }
-
-        // Check if usia is a valid integer
-        try {
-            usia.text.toString().toInt()
-        } catch (e: NumberFormatException) {
-            Toast.makeText(this, "Usia harus berupa angka!", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-        // Check if berat badan and tinggi badan are valid numbers
-        try {
-            beratBadan.text.toString().toDouble()
-            tinggiBadan.text.toString().toDouble()
-        } catch (e: NumberFormatException) {
-            Toast.makeText(this, "Berat dan tinggi badan harus berupa angka!", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-        return true
     }
 
-    // Function to generate a random 4-digit token
-    private fun generateToken(): String {
-        val random = Random()
-        val token = random.nextInt(9000) + 1000 // Generates a random number between 1000 and 9999
-        return token.toString()
+    private fun submitData() {
+        with(binding) {
+            val biodata = Biodata(
+                nama = edtNama.text.toString(),
+                usia = edtUsia.text.toString().toInt(),
+                jenis_kelamin = if (rgJenisKelamin.checkedRadioButtonId == R.id.rbLakiLaki) "L" else "P",
+                berat_badan = edtBeratBadan.text.toString().toDouble(),
+                tinggi_badan = edtTinggiBadan.text.toString().toDouble(),
+                riwayat_keturunan = when (rgRiwayatKeturunan.checkedRadioButtonId) {
+                    R.id.rbTidakAda -> 0
+                    R.id.rbSatuOrtu -> 1
+                    else -> 2
+                },
+                riwayat_diabetes = if (switchDiabetes.isChecked) 1 else 0,
+                prediksi_gula = -1.0 // Nilai awal untuk menandai bahwa prediksi belum diterima
+            )
+            viewModel.submitBiodata(biodata)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.state.observe(this) { state ->
+            when (state) {
+                is InputState.Loading -> showLoading()
+                is InputState.Success -> {
+                    hideLoading()
+
+                    // Use the Biodata from the ApiResponse
+                    val biodata = state.response.user_data // assuming response.data contains the Biodata object
+                    navigateToResult(biodata)
+
+                }
+                is InputState.Error -> {
+                    hideLoading()
+                    showError(state.message)
+                }
+            }
+        }
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.btnSubmit.isEnabled = false
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.btnSubmit.isEnabled = true
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToResult(biodata: Biodata) {
+        try {
+            val intent = Intent(this, ResultActivity::class.java).apply {
+                putExtra("biodata", biodata)
+            }
+            startActivity(intent)
+
+
+            // Reset form setelah berhasil
+            resetForm()
+        } catch (e: Exception) {
+            Log.e("InputActivity", "Error navigating to result: ${e.message}", e)
+            Toast.makeText(this, "Terjadi kesalahan: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun resetForm() {
+        binding.apply {
+            edtNama.text?.clear()
+            edtUsia.text?.clear()
+            edtBeratBadan.text?.clear()
+            edtTinggiBadan.text?.clear()
+            rgJenisKelamin.clearCheck()
+            rgRiwayatKeturunan.clearCheck()
+            switchDiabetes.isChecked = false
+        }
     }
 }
+
+
 
